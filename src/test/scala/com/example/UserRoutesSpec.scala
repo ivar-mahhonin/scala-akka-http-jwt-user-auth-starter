@@ -1,4 +1,4 @@
-package com.example
+package com.auth
 
 //#user-routes-spec
 //#test-top
