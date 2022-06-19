@@ -27,14 +27,12 @@ import akka.actor.typed.scaladsl.AskPattern._
 import akka.util.Timeout
 import com.auth.models.Command
 
-class UserRoutes(userRegistry: ActorRef[Command])(implicit
-    val system: ActorSystem[_]
-) {
+class UserRoutes(userRegistry: ActorRef[Command])(implicit val system: ActorSystem[_]) {
   import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport._
   import UserFormats._
 
   private implicit val timeout = Timeout.create(
-    system.settings.config.getDuration("my-app.routes.ask-timeout")
+    system.settings.config.getDuration("user-jwt-auth.api.ask-timeout")
   )
 
   def getUsers(): Future[Set[User]] = userRegistry.ask(GetUsers)
